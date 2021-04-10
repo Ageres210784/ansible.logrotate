@@ -72,5 +72,7 @@
         owner: root
         group: root
         mode: 0644
+      notify: 
+        - logrotate restart
       when: (ansible_distribution_major_version|int >= 20 and ansible_distribution == "Ubuntu")
   when: logrotate_use_hourly_rotation | bool
