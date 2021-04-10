@@ -42,6 +42,16 @@ Enable/disable hourly rotation with cron.
 logrotate_use_hourly_rotation: false
 ```
 
+Enable houry rotation with systemd for Ubuntu >= focal
+logrotate_use_hourly_rotation must be true
+
+```yml
+logrotate_timer:
+  options:
+    - OnCalendar=hourly
+    - Persistent=true
+```
+
 ### logrotate options
 
 List of global options.

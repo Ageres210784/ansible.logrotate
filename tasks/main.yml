@@ -57,10 +57,20 @@
   tags:
     - configuration
 
-- name: symlink for hourly rotation
-  file:
-    path: '/etc/cron.hourly/logrotate'
-    src: '/etc/cron.daily/logrotate'
-    mode: 0644
-    state: link
+- block:
+    - name: symlink for hourly rotation
+      file:
+        path: '/etc/cron.hourly/logrotate'
+        src: '/etc/cron.daily/logrotate'
+        mode: 0644
+        state: link
+
+    - name: systemd.timer for hourly rotation
+      template:
+        src: 'systemd/logrotate.timer.j2'
+        dest: '/lib/systemd/system/logrotate.timer'
+        owner: root
+        group: root
+        mode: 0644
+      when: (ansible_distribution_major_version|int >= 20 and ansible_distribution == "Ubuntu")
   when: logrotate_use_hourly_rotation | bool

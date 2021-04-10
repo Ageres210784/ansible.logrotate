@@ -10,10 +10,17 @@ logrotate_include_dir: /etc/logrotate.d
 logrotate_package: logrotate
 
 # Enable global configuration handling
-logrotate_global_config: true
+logrotate_global_config: false
 
 # Enable hourly rotation with cron.
 logrotate_use_hourly_rotation: false
+
+# List of option systemd timer for Ubuntu >= focal.
+logrotate_timer:
+  options:
+    - OnCalendar=daily
+    - AccuracySec=12h
+    - Persistent=true
 
 # Logrotate for wtmp
 logrotate_wtmp_enable: true
