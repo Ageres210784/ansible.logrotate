@@ -23,7 +23,7 @@ logrotate_timer:
     - Persistent=true
 
 # Logrotate for wtmp
-logrotate_wtmp_enable: true
+logrotate_wtmp_enable: false
 logrotate_wtmp:
   logs:
     - /var/log/wtmp
@@ -34,7 +34,7 @@ logrotate_wtmp:
     - rotate 1
 
 # Logrotate for btmp
-logrotate_btmp_enable: true
+logrotate_btmp_enable: false
 logrotate_btmp:
   logs:
     - /var/log/btmp
@@ -43,6 +43,15 @@ logrotate_btmp:
     - monthly
     - create 0660 root utmp
     - rotate 1
+
+logrotate_app_common_options:
+  - daily
+  - rotate 30
+  - missingok
+  - notifempty
+  - compress
+  - dateext
+  - copytruncate
 
 # More log files can be added that will log rotate.
 # An example of multiple log rotate applications with available settings:

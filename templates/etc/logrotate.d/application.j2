@@ -2,9 +2,22 @@
 
 {% for definition in item.definitions %}
 {{ definition.logs | join(" ") }} {
+{% if definition.options is defined and definition.options|length > 0 %}
 {% for option in definition.options %}
     {{ option }}
 {% endfor %}
+{% else %}
+{% for option in logrotate_app_common_options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+{% if definition.prerotate|default([]) %}
+    prerotate
+{% for line in definition.prerotate %}
+        {{ line }}
+{% endfor %}
+    endscript
+{% endif %}
 {% if definition.postrotate|default([]) %}
     postrotate
 {% for line in definition.postrotate %}
