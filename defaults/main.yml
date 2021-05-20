@@ -50,6 +50,7 @@ logrotate_app_common_options:
   - missingok
   - notifempty
   - compress
+  - delaycompress
   - dateext
   - copytruncate
 
